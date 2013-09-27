@@ -1,12 +1,13 @@
 Summary:	Version control system
 Name:		bzr
-Version:	2.5.1
+Version:	2.6.0
 Release:	1
 License:	GPL v2
 Group:		Development/Version Control
-Source0:	https://launchpad.net/bzr/2.5/2.5.1/+download/%{name}-%{version}.tar.gz
-# Source0-md5:	ac5079858364a046071000d5cdccb67b
+Source0:	https://launchpad.net/bzr/2.6/%{version}/+download/%{name}-%{version}.tar.gz
+# Source0-md5:	28c86653d0df10d202c6b842deb0ea35
 Patch0:		%{name}-locale-path.patch
+Patch1:		%{name}-crt.patch
 URL:		http://bazaar-vcs.org/
 BuildRequires:	python
 BuildRequires:	rpm-pythonprov
@@ -24,6 +25,7 @@ to meet your needs.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__python} setup.py build
@@ -53,6 +55,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/bzrlib
 %{py_sitedir}/bzrlib/*.py[co]
 %attr(755,root,root) %{py_sitedir}/bzrlib/_*.so
+%{py_sitedir}/bzrlib/branchfmt
 %{py_sitedir}/bzrlib/bundle
 %{py_sitedir}/bzrlib/doc
 %{py_sitedir}/bzrlib/doc_generate
